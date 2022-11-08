@@ -46,8 +46,8 @@
             <div class="user-wrapper">
                 <img src="{{images}}/user-2.png" width="40px" height="40px" alt="">
                 <div>
-                    <h4>Felix</h4>
-                    <small>Super Admin</small>
+                    <h4>{{admin.name}}</h4>
+                    <small>{{admin.role}}</small>
                 </div>
             </div>
         </header>
@@ -58,70 +58,28 @@
                 <h2>All Books</h2>
             </div>
             <div class="row">
+                {% for book in books %}
                 <div class="col-4">
                     <a href="{% url 'rent' %}"><img src="{{images}}/books/book1.jpeg"></a>
                     <a href="{% url 'rent' %}">
-                        <h4>Report</h4>
+                        <h4>{{book.name}}</h4>
                     </a>
                     <div class="rating">
+                        {% for rate in book.rate|get_range %}
                         <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
+                        {% endfor %}
                     </div>
-                    <p>$20.00</p>
+                    <p>${{book.cost}}</p>
                 </div>
-                <div class="col-4">
-                    <a href="{% url 'rent' %}"><img src="{{images}}/books/book2.jpg"></a>
-                    <a href="{% url 'rent' %}">
-                        <h4>Shadow & Bone</h4>
-                    </a>
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                    <p>$20.00</p>
-                </div>
-                <div class="col-4">
-                    <a href="{% url 'rent' %}"><img src="{{images}}/books/book1.jpeg"></a>
-                    <a href="{% url 'rent' %}">
-                        <h4>Report</h4>
-                    </a>
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                    </div>
-                    <p>$20.00</p>
-                </div>
-                <div class="col-4">
-                    <a href="{% url 'rent' %}"><img src="{{images}}/books/book1.jpeg"></a>
-                    <a href="{% url 'rent' %}">
-                        <h4>Report</h4>
-                    </a>
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                    </div>
-                    <p>$20.00</p>
-                </div>
+                {% endfor %}
             </div>
-            <div class="page-btn">
-                <span>1</span>
-                <span>2</span>
-                <span>3</span>
-                <span>4</span>
-                <span>&#8594;</span>
-            </div>
+<!--            <div class="page-btn">-->
+<!--                <span>1</span>-->
+<!--                <span>2</span>-->
+<!--                <span>3</span>-->
+<!--                <span>4</span>-->
+<!--                <span>&#8594;</span>-->
+<!--            </div>-->
         </div>
     </div>
 

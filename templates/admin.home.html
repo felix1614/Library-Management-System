@@ -25,7 +25,7 @@
                 <li><a href="{% url 'users' %}"><span class="las la-book-reader"></span><span>Users</span></a></li>
                 <li><a href="{% url 'books' %}"><span class="las la-atlas"></span><span>Books</span></a></li>
                 <li><a href="{% url 'rental' %}"><span class="las la-receipt"></span><span>Rent</span></a></li>
-                <li><a href=""><span class="las la-binoculars"></span><span>Scan</span></a></li>
+                <li><a href="{% url 'scan' %}"><span class="las la-binoculars"></span><span>Scan</span></a></li>
             </ul>
         </div>
     </div>
@@ -43,8 +43,8 @@
             <div class="user-wrapper">
                 <img src="{{images}}/user-2.png" width="40px" height="40px" alt="">
                 <div>
-                    <h4>Felix</h4>
-                    <small>Super Admin</small>
+                    <h4>{{admin.name}}</h4>
+                    <small>{{admin.role}}</small>
                 </div>
             </div>
         </header>
@@ -53,7 +53,7 @@
             <div class="cards">
                 <div class="card-single">
                     <div>
-                        <h1>50</h1>
+                        <h1>{{total.totalUser}}</h1>
                         <span>Users</span>
                     </div>
                     <div>
@@ -63,7 +63,7 @@
 
                 <div class="card-single">
                     <div>
-                        <h1>500</h1>
+                        <h1>{{total.totalBooks}}</h1>
                         <span>Books</span>
                     </div>
                     <div>
@@ -87,12 +87,14 @@
                                             <td>Author</td>
                                         </tr>
                                     </thead>
+                                    {% for book in books %}
                                     <tbody>
                                         <tr>
-                                            <td>Shadow And Bone</td>
-                                            <td>Felix Monarchy</td>
+                                            <td>{{book.name}}</td>
+                                            <td>{{book.author}}</td>
                                         </tr>
                                     </tbody>
+                                    {% endfor %}
                                 </table>
                             </div>
                         </div>
@@ -105,12 +107,13 @@
                             <button>See All <span class="las la-arrow-right"></span></button>
                         </div>
                         <div class="card-body">
+                            {% for user in users %}
                             <div class="customer">
                                 <div class="info">
                                     <img src="{{images}}/user-2.png" width="40px" height="40px">
                                     <div>
-                                        <h4>Shadow Monarchy</h4>
-                                        <small>1234567</small>
+                                        <h4>{{user.username}}</h4>
+                                        <small>{{user.id}}</small>
                                     </div>
                                 </div>
                                 <div class="contact">
@@ -119,6 +122,7 @@
                                     <span class="las la-phone"></span>
                                 </div>
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

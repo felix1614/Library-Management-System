@@ -10,4 +10,5 @@ urlpatterns = [path('', views.login, name="login"),
                path('rental/', views.rents, name="rental"),
                path('userupdate/', views.userUpdate, name="userUpdate"),
                path('users/', views.users, name="users"),
+               path('scan/', views.users, name="scan")
                ]
