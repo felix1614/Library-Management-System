@@ -1,0 +1,5 @@
+mongoConn:
+  host: localhost
+  port: 27017
+  userName: Felix
+  password: Fe12i24
