@@ -15,9 +15,11 @@
             <br>
             <br>
             <button type="button" class="submit-btn-1">Log In</button>
-            <form class="input-group" id="login" action="{% url 'home' %}">
-                <input id="userName" type="text" class="input-field" placeholder="User Name" required>
-                <input id="passWord" type="text" class="input-field" placeholder="Password" required>
+            {% csrf_token %}
+            <form class="input-group" id="login" onsubmit="loginValidation()">
+                {% csrf_token %}
+                <input id="userName" type="text" class="input-field" placeholder="User Name" name="username" required>
+                <input id="passWord" type="text" class="input-field" placeholder="Password" name="pass" required>
                 <br>
                 <br>
                 <button type="submit" class="submit-btn">Log in</button>
