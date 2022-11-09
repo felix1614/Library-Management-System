@@ -1,10 +1,9 @@
 # Projects
 i) LOGIN
 1. Admin can login with a given username and password
-
-ii) Dashboard
 ![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/login.png "Optional Title")
 
+ii) Dashboard
 1. After the successful of login dashboard will open where you can see the newly arrived books from past 30 days,
 ![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/Dashboard.png "Optional Title")
 
@@ -21,8 +20,16 @@ iii) USER PAGE
 3. when click on user it will open a page to update user details.
 
 iv) RENT A BOOK
-![Alt text]( "Optional Title")
+![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/book%20rent.png "Optional Title")
+![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/rent%20book.png "Optional Title")
 
 1. admin can give the book on rent to a user by clicking on rent option on the sidebar/ or by clicking the book listing on the books/ new arrival page.
+
+v) Books
+![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/all%20books.png "Optional Title")
+![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/New%20Arrivals.png "Optional Title")
+![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/new%20customers.png "Optional Title")
+![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/dynamic%20page.png "Optional Title")
+
 
 
