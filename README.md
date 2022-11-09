@@ -27,9 +27,16 @@ iv) RENT A BOOK
 
 v) Books
 ![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/all%20books.png "Optional Title")
+
 ![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/New%20Arrivals.png "Optional Title")
+
 ![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/new%20customers.png "Optional Title")
+
+vi) Responsive page
+
 ![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/dynamic%20page.png "Optional Title")
 
-
+**need some extra time to finish the remaining**
+1) scan
+2) save
 
