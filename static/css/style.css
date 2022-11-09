@@ -32,6 +32,14 @@
     color: #fff;
 }
 
+.pointer-btn {
+    cursor: pointer
+}
+
+.pointer-btn:hover {
+    color: #ffb6c1
+}
+
 .sidebar-brand span {
     display: inline-block;
     padding-right: 1rem;

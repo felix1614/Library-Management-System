@@ -46,39 +46,48 @@
             <div class="user-wrapper">
                 <img src="{{images}}/user-2.png" width="40px" height="40px" alt="">
                 <div>
-                    <h4>Felix</h4>
-                    <small>Super Admin</small>
+                    <h4>{{admin.name}}</h4>
+                    <small>{{admin.role}}</small>
                 </div>
             </div>
         </header>
 
         <div class="small-container">
             <div class="row row-2">
-                <h2>All Users</h2>
+                <h2>{{arrival}}</h2>
+                <button id="AddUser" onclick="postForm('addUser')" class="add-button">Add User</button>
             </div>
-            <div class="row">
+            <div class="row" onclick="">
+                {% for user in users %}
                 <a href="{% url 'userUpdate' %}">
                     <div class="col-4">
                         <img src="{{images}}/user1.jpg">
-                        <h4>Shadow Monarch</h4>
+                        <h4>{{user.username}}</h4>
                         <div class="rating">
                             <span>ID:</span>
-                            <h3>123123</h3>
+                            <h3>{{user.id}}</h3>
                             <br>
                             <span>Ph no: </span>
-                            <h3 id="ph-no">98783636</h3>
+                            <h3 id="ph-no">{{user.mobile}}</h3>
                         </div>
                     </div>
                 </a>
+                {% endfor %}
             </div>
-            <div class="page-btn">
-                <span>1</span>
-                <span>&#8594;</span>
-            </div>
+<!--            <div class="page-btn">-->
+<!--                <span>1</span>-->
+<!--                <span>&#8594;</span>-->
+<!--            </div>-->
         </div>
     </div>
 
+    {% csrf_token %}
+    <form method="POST" id="postChanger">
+        {% csrf_token %}
+    </form>
+
     <script src="{% static 'js/index.toggle.js' %}"></script>
+    <script type="text/javascript " src="{% static 'js/getToPostConvertor.js' %} "></script>
 </body>
 
 </html>

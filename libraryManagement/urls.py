@@ -21,13 +21,14 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', include('library.urls')),
     path('home/', include('library.urls')),
-    path('rent/', include('library.urls')),
-    path('books/', include('library.urls')),
-    path('rental/', include('library.urls')),
-    path('userupdate/', include('library.urls')),
-    path('users/', include('library.urls')),
-    path('scan/', include('library.urls')),
-    path('admin/', admin.site.urls),
+    path('rent', include('library.urls')),
+    path(r'^books/$', include('library.urls')),
+    path(r'^rental/$', include('library.urls')),
+    path(r'^update/$', include('library.urls')),
+    path(r'^users/$', include('library.urls')),
+    path(r'^scan/$', include('library.urls')),
+    path(r'^save/$', include('library.urls')),
+    path(r'^admin/$', admin.site.urls),
 ]
 
 

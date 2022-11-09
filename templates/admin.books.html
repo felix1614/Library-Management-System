@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-{% load static %}
-{% static "images" as images %}
+<!DOCTYPE html> {% load static %} {% static "images" as images %}
 <html lang="en">
 
 <head>
@@ -55,7 +53,8 @@
 
         <div class="small-container">
             <div class="row row-2">
-                <h2>All Books</h2>
+                <h2>{{arrival}}</h2>
+                <button id="bookArrival" onclick="postForm('bookArrival')" class="add-button">Add Book</button>
             </div>
             <div class="row">
                 {% for book in books %}
@@ -66,20 +65,19 @@
                     </a>
                     <div class="rating">
                         {% for rate in book.rate|get_range %}
-                        <i class="fa fa-star"></i>
-                        {% endfor %}
+                        <i class="fa fa-star"></i> {% endfor %}
                     </div>
                     <p>${{book.cost}}</p>
                 </div>
                 {% endfor %}
             </div>
-<!--            <div class="page-btn">-->
-<!--                <span>1</span>-->
-<!--                <span>2</span>-->
-<!--                <span>3</span>-->
-<!--                <span>4</span>-->
-<!--                <span>&#8594;</span>-->
-<!--            </div>-->
+            <!--            <div class="page-btn">-->
+            <!--                <span>1</span>-->
+            <!--                <span>2</span>-->
+            <!--                <span>3</span>-->
+            <!--                <span>4</span>-->
+            <!--                <span>&#8594;</span>-->
+            <!--            </div>-->
         </div>
     </div>
 

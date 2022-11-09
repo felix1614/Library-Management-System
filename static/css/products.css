@@ -78,6 +78,24 @@ p {
     transition: background 0.5s;
 }
 
+.add-button {
+    width: 130px;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: linear-gradient(to right, #ff105f, #ffad06);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    margin-top: 20px;
+    margin-right: 40px;
+}
+
+.add-button:hover {
+    background: linear-gradient(to left, #ff105f, #ffad06);
+}
+
 .header {
     background: radial-gradient(#fff, #ffd6d6);
 }

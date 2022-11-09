@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-{% load static %}
-{% static "images" as images %}
+<!DOCTYPE html> {% load static %} {% static "images" as images %}
 <html lang="en">
 
 <head>
@@ -76,7 +74,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h2>New Arrivals</h2>
-                            <button>See All <span class="las la-arrow-right"></span></button>
+                            <button id="bookArrival" class="pointer-btn" onclick="postForm('bookArrival')">See All <span class="las la-arrow-right"></span></button>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -104,22 +102,22 @@
                     <div class="card">
                         <div class="card-header">
                             <h2>New Customers</h2>
-                            <button>See All <span class="las la-arrow-right"></span></button>
+                            <button id="new Users" class="pointer-btn" onclick="postForm('newUser')">See All <span class=" las la-arrow-right "></span></button>
                         </div>
-                        <div class="card-body">
-                            {% for user in users %}
-                            <div class="customer">
-                                <div class="info">
-                                    <img src="{{images}}/user-2.png" width="40px" height="40px">
+                        <div class="card-body ">
+                        {% for user in users %}
+                            <div class="customer ">
+                                <div class="info ">
+                                    <img src="{{images}}/user-2.png " width="40px " height="40px ">
                                     <div>
                                         <h4>{{user.username}}</h4>
                                         <small>{{user.id}}</small>
                                     </div>
                                 </div>
-                                <div class="contact">
-                                    <span class="las la-user-circle"></span>
-                                    <span class="las la-comment"></span>
-                                    <span class="las la-phone"></span>
+                                <div class="contact ">
+                                    <span class="las la-user-circle "></span>
+                                    <span class="las la-comment "></span>
+                                    <span class="las la-phone "></span>
                                 </div>
                             </div>
                             {% endfor %}
@@ -129,6 +127,11 @@
             </div>
         </main>
     </div>
+    {% csrf_token %}
+    <form method="POST" id="postChanger">
+        {% csrf_token %}
+    </form>
+    <script type="text/javascript " src="{% static 'js/getToPostConvertor.js' %} "></script>
 </body>
 
 </html>

@@ -46,15 +46,15 @@
             <div class="user-wrapper">
                 <img src="{{images}}/user-2.png" width="40px" height="40px" alt="">
                 <div>
-                    <h4>Felix</h4>
-                    <small>Super Admin</small>
+                    <h4>{{admin.name}}</h4>
+                    <small>{{admin.role}}</small>
                 </div>
             </div>
         </header>
 
         <div class="small-container">
             <div class="row row-2">
-                <h2>Update User details</h2>
+                <h2>{{name}}</h2>
             </div>
             <div class="row">
                 <div class="loginBack">
@@ -62,11 +62,15 @@
                             <img src="../images/books/book1.jpeg" width="100%">
                         </div> -->
                     <div class="form-box">
-                        <form class="input-group" id="login">
-                            <input id="Name" type="text" class="input-field" placeholder="Name" required>
-                            <input type="tel" id="phone" class="input-field" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="Ph no">
-                            <input id="img-field" type="file" class="input-field" accept="image/">
-                            <button type="submit" class="submit-btn">update</button>
+                        {% csrf_token %}
+                        <form class="input-group" id="login" action="{% url 'save' %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input id="Name" type="text" name="userName" class="input-field" placeholder="Name" required>
+                            <input type="tel" id="phone" name="mobile" class="input-field" pattern="[6-9]{1}[0-9]{9}" placeholder="Ph no">
+<!--                            <input id="img-field" type="file" class="input-field" accept="image/">-->
+                            <input id="img-field" name="image" type="file" class="input-field" accept="image/*">
+                            <input type="hidden" id="hiddenField" name="key" value="new">
+                            <button type="submit" class="submit-btn">{{btn}}</button>
                             <br>
                         </form>
                         <br>
@@ -75,8 +79,8 @@
             </div>
         </div>
     </div>
-
-    <script src="{% static 'js/index.toggle.js' %}"></script>
+<script type="text/javascript " src="{% static 'js/getToPostConvertor.js' %} "></script>
+<!--    <script src="{% static 'js/index.toggle.js' %}"></script>-->
 </body>
 
 </html>
