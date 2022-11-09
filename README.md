@@ -39,4 +39,5 @@ vi) Responsive page
 **need some extra time to finish the remaining**
 1) scan
 2) save
+3) image upload
 
