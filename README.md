@@ -17,3 +17,12 @@ iii) USER PAGE
 1. It will list all the users and a button to create a user.
 2. user can be created by clicking on that button Add User button.
 ![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/add%20user.png "Optional Title")
+
+3. when click on user it will open a page to update user details.
+
+iv) RENT A BOOK
+![Alt text]( "Optional Title")
+
+1. admin can give the book on rent to a user by clicking on rent option on the sidebar/ or by clicking the book listing on the books/ new arrival page.
+
+
