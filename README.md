@@ -12,7 +12,7 @@ ii) Dashboard
 4. In the sidebar user can shift to different page like users page, books, rental, dashboard, and scan.
 
 iii) USER PAGE
-![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/static/images/all users.png?raw=true "Optional Title")
+![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/static/images/all%20.png?raw=true "Optional Title")
 1. It will list all the users and a button to create a user.
 2. user can be created by clicking on that button Add User button.
-![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/static/images/add user.png?raw=true "Optional Title")
+![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/static/images/add%20user.png?raw=true "Optional Title")
