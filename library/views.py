@@ -106,18 +106,50 @@ def home(request):
         #                                            'total': {'totalUser': usersQty, 'totalBooks': totalBooks},
         #                                            'admin': admin})
     else:
-        newArrivalBooks = [books for books in db.books.find({"isdeleted": {'$nin': ["true", True]}, "newArrival":{'$in':[True, "true"]}})]
+        # newArrivalBooks = [books for books in db.books.find({"isdeleted": {'$nin': ["true", True]}, "newArrival":{'$in':[True, "true"]}})]
+        # userSearch = []
+        # admin = [admin for admin in db.users.find({"isdeleted": {'$nin': ["true", True]}, "isadmin": {'$nin': ["false", False]}})]
+        # admin = {'name': admin[0]['username'], 'role': admin[0]['role']} if len(admin) >= 1 else {'name': 'unknown', 'role': 'unknown'}
+        # usersQty = 0
+        # for user in db.users.find({"isdeleted": {'$nin': ["true", True]}, "isadmin":{'$in':["false", False]}}):
+        #     usersQty += 1
+        #     userDate = datetime.fromtimestamp(int(user["date"]))
+        #     if (datetime.now() - userDate).days <= 15:
+        #         userSearch += user,
+        # totalBooks, booksQty = 0, 0
+        # for book in db.books.find({"isdeleted": {'$nin': ["true", True]}}):
+        #     totalBooks += 1
+        #     bookDate = datetime.fromtimestamp(int(book["date"]))
+        #     if (datetime.now() - bookDate).days <= 15:
+        #         if booksQty <= 4:
+        #             newArrivalBooks += book,
+        #             booksQty += 1
+        totalBooks, booksQty, newArrivalBooks = 0, 0, []
+        for book in db.books.find({"isdeleted": {'$nin': ["true", True]}}):
+            totalBooks += 1
+            bookDate = datetime.fromtimestamp(int(book["date"]))
+            if (datetime.now() - bookDate).days <= 15:
+                if booksQty <= 4:
+                    newArrivalBooks += book,
+                    booksQty += 1
         userSearch = []
-        admin = [admin for admin in db.users.find({"isdeleted": {'$nin': ["true", True]}, "isadmin": {'$nin': ["false", False]}})]
-        admin = {'name': admin[0]['username'], 'role': admin[0]['role']} if len(admin) >= 1 else {'name': 'unknown', 'role': 'unknown'}
-        usersQty = 0
-        for user in db.users.find({"isdeleted": {'$nin': ["true", True]}, "isadmin":{'$in':["false", False]}}):
+        admin = [admin for admin in
+                 db.users.find({"isdeleted": {'$nin': ["true", True]}, "isadmin": {'$nin': ["false", False]}})]
+        admin = {'name': admin[0]['username'], 'role': admin[0]['role']} if len(admin) >= 1 else {'name': 'unknown',
+                                                                                                  'role': 'unknown'}
+        usersQty, newUser = 0, 0
+        for user in db.users.find({"isdeleted": {'$nin': ["true", True]}, "isadmin": {'$in': ["false", False]}}):
             usersQty += 1
             userDate = datetime.fromtimestamp(int(user["date"]))
             if (datetime.now() - userDate).days <= 15:
-                userSearch += user,
-        totalBooks = len([books for books in db.books.find({"isdeleted": {'$nin': ["true", True]}})])
-        return render(request, 'admin.home.html', {'users': userSearch, 'books': newArrivalBooks, 'total': {'totalUser': usersQty, 'totalBooks':totalBooks}, 'admin': admin})
+                if newUser <= 4:
+                    userSearch += user,
+                    newUser += 1
+        # totalBooks = len([books for books in db.books.find({"isdeleted": {'$nin': ["true", True]}})])
+        return render(request, 'admin.home.html', {'users': userSearch, 'books': newArrivalBooks,
+                                                   'total': {'totalUser': usersQty, 'totalBooks': totalBooks},
+                                                   'admin': admin})
+        # return render(request, 'admin.home.html', {'users': userSearch, 'books': newArrivalBooks, 'total': {'totalUser': usersQty, 'totalBooks':totalBooks}, 'admin': admin})
 
 
 def rent(request):
@@ -125,7 +157,7 @@ def rent(request):
 
 
 def rents(request):
-    return render(request, "admin.rents.html")
+    return render(request, "admin.rentForm.html")
 
 
 def saveUpdateForm(request):
@@ -136,14 +168,23 @@ def saveUpdateForm(request):
                      db.users.find({"isdeleted": {'$nin': ["true", True]}, "isadmin": {'$nin': ["false", False]}})]
             admin = {'name': admin[0]['username'], 'role': admin[0]['role']} if len(admin) >= 1 else {'name': 'unknown',
                                                                                                       'role': 'unknown'}
-            options = {"admin": admin, "name": "Add User", "btn": "Create"}
+            options = {"admin": admin, "name": "Add User", "btn": "Add User"}
             return render(request, "admin.user.update.html", options)
-        else:
+        elif req['key'] == 'updateUser':
             admin = [admin for admin in
                      db.users.find({"isdeleted": {'$nin': ["true", True]}, "isadmin": {'$nin': ["false", False]}})]
             admin = {'name': admin[0]['username'], 'role': admin[0]['role']} if len(admin) >= 1 else {'name': 'unknown',
                                                                                                       'role': 'unknown'}
-            options = {"admin": admin, "name": "Add User", "btn": "Update"}
+            options = {"admin": admin, "name": "Add User", "btn": "Update User"}
+            return render(request, "admin.user.update.html", options)
+
+        elif req['key'] == 'addBook':
+            admin = [admin for admin in
+                     db.users.find({"isdeleted": {'$nin': ["true", True]}, "isadmin": {'$nin': ["false", False]}})]
+            admin = {'name': admin[0]['username'], 'role': admin[0]['role']} if len(admin) >= 1 else {'name': 'unknown',
+                                                                                                      'role': 'unknown'}
+            options = {"admin": admin, "name": "Add Book", "btn": "Add Book"}
+            return render(request, "admin.book.create.html", options)
 
 
 def users(request):
@@ -175,20 +216,56 @@ def scan(request):
 
 
 def save(request):
-    if request.method == "POST":
-        req = request.POST
-        if req["key"] == "new":
-            userName = req['userName']
-            mobile = req["mobile"]
-            profile = request.FILES['image']
-            instance = ImageModel()
-            instance.image = profile
-            instance.save()
-            media_url = settings.MEDIA_URL
-            with open(f"{media_url}", "rb") as img_file:
-                my_string = base64.b64encode(img_file.read())
-            print(my_string)
-            df = my_string
+    try:
+        if request.method == "POST":
+            req = request.POST
+            if req["key"] == "User":
+                userName = req['userName']
+                mobile = req["mobile"]
+                for user in db.unique_id.find({"key": "user"}):
+                    idNum = user['id']+1
+                db.unique_id.update({"key": 'user'}, {'$set': {"id": idNum}})
+                user_id = f"user_000{idNum}"
+                userDate = time.time()
+                role = "customer"
+                userData = {"username": userName, "isdeleted": False, "isadmin": False, "id": user_id,
+                            "date":userDate, "role": role, "mobile": mobile}
+                db.users.insert(userData)
+                admin = [admin for admin in
+                         db.users.find({"isdeleted": {'$nin': ["true", True]}, "isadmin": {'$nin': ["false", False]}})]
+                admin = {'name': admin[0]['username'], 'role': admin[0]['role']} if len(admin) >= 1 else {'name': 'unknown',
+                                                                                                          'role': 'unknown'}
+                options = {"admin": admin, "name": "Add User", "btn": "Create", "msg": "user created successfully", "new": True}
+                return render(request, "admin.user.update.html", options)
+            else:
+                bookName = req['bookName']
+                author = req['author']
+                cost = int(req['cost'])
+                rate = int(req['rate']) if int(req['rate']) >= 1 else 1
+                for user in db.unique_id.find({"key": "book"}):
+                    idNum = user['id']+1
+                db.unique_id.update({"key": 'book'}, {'$set': {"id": idNum}})
+                book_id = f"book_000{idNum}"
+                bookDate = time.time()
+                bookData = {"bookId": book_id, "name": bookName, "author": author, "newArrival": True,
+                            "isdeleted": False, "cost": cost, "rate": rate, "date": bookDate}
+
+                db.books.insert(bookData)
+                admin = [admin for admin in
+                         db.users.find({"isdeleted": {'$nin': ["true", True]}, "isadmin": {'$nin': ["false", False]}})]
+                admin = {'name': admin[0]['username'], 'role': admin[0]['role']} if len(admin) >= 1 else {
+                    'name': 'unknown',
+                    'role': 'unknown'}
+                options = {"admin": admin, "name": "Add User", "btn": "Create", "msg": "Book created successfully", "new": True}
+                return render(request, "admin.book.create.html", options)
+
+    except Exception as e:
+        admin = [admin for admin in
+                 db.users.find({"isdeleted": {'$nin': ["true", True]}, "isadmin": {'$nin': ["false", False]}})]
+        admin = {'name': admin[0]['username'], 'role': admin[0]['role']} if len(admin) >= 1 else {'name': 'unknown',
+                                                                                                  'role': 'unknown'}
+        options = {"admin": admin, "name": "Add User", "btn": "Create", "msg": "Cannot create user", "new": True}
+        return render(request, "admin.message.html", options)
 
 
 

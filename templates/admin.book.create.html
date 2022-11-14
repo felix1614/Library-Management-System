@@ -25,7 +25,7 @@
         <div class="sidebar-menu">
             <ul>
                 <li><a href="{% url 'home' %}"><span class="las la-igloo"></span><span>Dashboard</span></a></li>
-                <li><a href="{% url 'users' %}" class="active"><span class="las la-book-reader"></span><span>Users</span></a></li>
+                <li><a href="{% url 'users' %}"><span class="las la-book-reader"></span><span>Users</span></a></li>
                 <li><a href="{% url 'books' %}"><span class="las la-atlas"></span><span>Books</span></a></li>
                 <li><a href="{% url 'rental' %}"><span class="las la-receipt"></span><span>Rent</span></a></li>
                 <li><a href=""><span class="las la-binoculars"></span><span>Scan</span></a></li>
@@ -53,41 +53,42 @@
         </header>
 
         <div class="small-container">
+            {% if new %}
+                <div class="row row-2">
+                    <h2>{{msg}}</h2>
+                </div>
+            {% else %}
             <div class="row row-2">
-                <h2>{{arrival}}</h2>
-                <button id="AddUser" onclick="postForm('addUser')" class="add-button">Add User</button>
+                <h2>{{name}}</h2>
             </div>
-            <div class="row" onclick="">
-                {% for user in users %}
-                <a href="#" onclick="postForm('updateUser')">
-                    <div class="col-4">
-                        <img src="{{images}}/user1.jpg">
-                        <h4>{{user.username}}</h4>
-                        <div class="rating">
-                            <span class="font-size">Id:</span>
-                            <h3 id="uname">{{user.id}}</h3>
+            {% endif %}
+            <div class="row">
+                <div class="loginBack">
+                    <!-- <div class="col-2">
+                            <img src="../images/books/book1.jpeg" width="100%">
+                        </div> -->
+                    <div class="form-box-book">
+                        {% csrf_token %}
+                        <form class="input-group" id="login" action="{% url 'save' %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input id="Name" type="text" name="bookName" class="input-field" placeholder="Name" required>
+                            <input id="auth" type="text" name="author" class="input-field" placeholder="Author" required>
+                            <input id="cost" type="text" name="cost" class="input-field" placeholder="Cost" required>
+                            <input id="rating" type="text" name="rate" class="input-field" placeholder="rate" required>
+<!--                            <input id="img-field" type="file" class="input-field" accept="image/">-->
+                            <input id="img-field" name="image" type="file" class="input-field" accept="image/*">
+                            <input type="hidden" id="hiddenField" name="key" value="newBook">
+                            <button type="submit" class="submit-btn">{{btn}}</button>
                             <br>
-                            <span class="font-size">Mobile: </span>
-                            <h3 id="ph-no">{{user.mobile}}</h3>
-                        </div>
+                        </form>
+                        <br>
                     </div>
-                </a>
-                {% endfor %}
+                </div>
             </div>
-<!--            <div class="page-btn">-->
-<!--                <span>1</span>-->
-<!--                <span>&#8594;</span>-->
-<!--            </div>-->
         </div>
     </div>
-
-    {% csrf_token %}
-    <form method="POST" id="postChanger">
-        {% csrf_token %}
-    </form>
-
-    <script src="{% static 'js/index.toggle.js' %}"></script>
-    <script type="text/javascript " src="{% static 'js/getToPostConvertor.js' %} "></script>
+<script type="text/javascript " src="{% static 'js/getToPostConvertor.js' %} "></script>
+<!--    <script src="{% static 'js/index.toggle.js' %}"></script>-->
 </body>
 
 </html>

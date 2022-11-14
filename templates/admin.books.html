@@ -54,7 +54,7 @@
         <div class="small-container">
             <div class="row row-2">
                 <h2>{{arrival}}</h2>
-                <button id="bookArrival" onclick="postForm('bookArrival')" class="add-button">Add Book</button>
+                <button id="bookArrival" onclick="postForm('addBook')" class="add-button">Add Book</button>
             </div>
             <div class="row">
                 {% for book in books %}
@@ -81,6 +81,11 @@
         </div>
     </div>
 
+     {% csrf_token %}
+    <form method="POST" id="postChanger">
+        {% csrf_token %}
+    </form>
+    <script type="text/javascript " src="{% static 'js/getToPostConvertor.js' %} "></script>
     <script src="{% static 'js/index.toggle.js' %}"></script>
 </body>
 

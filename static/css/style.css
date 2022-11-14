@@ -317,6 +317,25 @@ tr td:last-child {
     color: var(--main-color);
 }
 
+.font-size {
+    font-size: 0.8rem;
+}
+
+.msg {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.form-box-book {
+    width: 380px;
+    height: 500px;
+    position: relative;
+    margin: 6% auto;
+    padding: 5px;
+    overflow: hidden;
+    margin-top: 100px;
+}
+
 @media only screen and (max-width: 1200px) {
     .sidebar {
         width: 70px;
