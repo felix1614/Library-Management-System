@@ -26,7 +26,7 @@
                 <li><a href="{% url 'users' %}"><span class="las la-book-reader"></span><span>Users</span></a></li>
                 <li><a href="{% url 'books' %}" class="active"><span class="las la-atlas"></span><span>Books</span></a></li>
                 <li><a href="{% url 'rental' %}"><span class="las la-receipt"></span><span>Rent</span></a></li>
-                <li><a href=""><span class="las la-binoculars"></span><span>Scan</span></a></li>
+                <li><a href="{% url 'scan' %}"><span class="las la-binoculars"></span><span>Scan</span></a></li>
             </ul>
         </div>
     </div>
@@ -59,8 +59,8 @@
             <div class="row">
                 {% for book in books %}
                 <div class="col-4">
-                    <a href="{% url 'rent' %}"><img src="{{images}}/books/book1.jpeg"></a>
-                    <a href="{% url 'rent' %}">
+                    <a href="#" onclick="postForm(['rentPage','{{book.bookId}}'])"><img src="{{images}}/books/book1.jpeg"></a>
+                    <a href="#" onclick="postForm(['rentPage','{{book.bookId}}'])">
                         <h4>{{book.name}}</h4>
                     </a>
                     <div class="rating">
@@ -86,7 +86,7 @@
         {% csrf_token %}
     </form>
     <script type="text/javascript " src="{% static 'js/getToPostConvertor.js' %} "></script>
-    <script src="{% static 'js/index.toggle.js' %}"></script>
+<!--    <script src="{% static 'js/index.toggle.js' %}"></script>-->
 </body>
 
 </html>

@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', include('library.urls')),
     path('home/', include('library.urls')),
-    path('rent', include('library.urls')),
+    path('rentform', include('library.urls')),
     path(r'^books/$', include('library.urls')),
     path(r'^rental/$', include('library.urls')),
     path(r'^update/$', include('library.urls')),

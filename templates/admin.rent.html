@@ -27,7 +27,7 @@
                 <li><a href="{% url 'users' %}"><span class="las la-book-reader"></span><span>Users</span></a></li>
                 <li><a href="{% url 'books' %}"><span class="las la-atlas"></span><span>Books</span></a></li>
                 <li><a href="{% url 'rental' %}"><span class="las la-receipt"></span><span>Rent</span></a></li>
-                <li><a href=""><span class="las la-binoculars"></span><span>Scan</span></a></li>
+                <li><a href="{% url 'scan' %}"><span class="las la-binoculars"></span><span>Scan</span></a></li>
             </ul>
         </div>
     </div>
@@ -45,8 +45,8 @@
             <div class="user-wrapper">
                 <img src="{{images}}/user-2.png" width="40px" height="40px" alt="">
                 <div>
-                    <h4>Felix</h4>
-                    <small>Super Admin</small>
+                    <h4>{{admin.name}}</h4>
+                    <small>{{admin.role}}</small>
                 </div>
             </div>
         </header>
@@ -62,29 +62,46 @@
                             <img src="{{images}}/books/book1.jpeg" width="100%">
                         </div>
                         <div class="col-2">
-                            <h1>FantasyBook by felix</h1>
-                            <h4>$20.00/per day</h4>
+                            <h1 id="bookName">{{bookDet.name}}</h1>
+                            <h4 id="bookCost">${{bookDet.cost}}/per day</h4>
+                            <input type="hidden" id="bookID" name="key" value="{{bookDet.bookId}}">
                             <br>
                             <div id="duration-div">
-                                <select>
-                            <option>Select Duration Period</option>
-                            <option>Days</option>
-                            <option>Months</option>
-                            <option>Years</option>
+                            <select id="dur">
+                            <option value="Days">Select Duration Period</option>
+                            <option value="Days">Days</option>
+                            <option value="Months">Months</option>
+                            <option value="Years">Years</option>
                             </select>
+<!--                                {% if 'form' %}-->
+<!--                                    <input id="duration" type="number" value={{det.duration}}>-->
+<!--                                {% else %}-->
+<!--                                    <input id="duration" type="number" value="1">-->
+<!--                                {% endif %}-->
                                 <input id="duration" type="number" value="1">
                             </div>
+                            {% if 'form' %}
+                            <input id="userName" type="text" class="input-field" placeholder="User Name/Id" value="{{det.userName}}" required>
+                            {% else %}
                             <input id="userName" type="text" class="input-field" placeholder="User Name/Id" required>
+                            {% endif %}
                             <br>
-                            <a href="" class="btn">Add to Shelf</a>
+                            <a href="#" class="btn" onclick="postForm('RentBook')">Add to Shelf</a>
+                                {% if 'msg' %}
+                                <h4>{{msg}}</h4>
+                                {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="{% static 'js/index.toggle.js' %}"></script>
+     {% csrf_token %}
+    <form method="POST" id="postChanger">
+        {% csrf_token %}
+    </form>
+<script type="text/javascript " src="{% static 'js/getToPostConvertor.js' %} "></script>
+<!--    <script src="{% static 'js/index.toggle.js' %}"></script>-->
 </body>
 
 </html>

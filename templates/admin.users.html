@@ -28,7 +28,7 @@
                 <li><a href="{% url 'users' %}" class="active"><span class="las la-book-reader"></span><span>Users</span></a></li>
                 <li><a href="{% url 'books' %}"><span class="las la-atlas"></span><span>Books</span></a></li>
                 <li><a href="{% url 'rental' %}"><span class="las la-receipt"></span><span>Rent</span></a></li>
-                <li><a href=""><span class="las la-binoculars"></span><span>Scan</span></a></li>
+                <li><a href="{% url 'scan' %}"><span class="las la-binoculars"></span><span>Scan</span></a></li>
             </ul>
         </div>
     </div>
@@ -59,7 +59,7 @@
             </div>
             <div class="row" onclick="">
                 {% for user in users %}
-                <a href="#" onclick="postForm('updateUser')">
+                <a href="#" onclick="postForm(['updateUser','{{user.id}}'])">
                     <div class="col-4">
                         <img src="{{images}}/user1.jpg">
                         <h4>{{user.username}}</h4>

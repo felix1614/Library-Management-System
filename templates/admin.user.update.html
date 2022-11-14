@@ -28,7 +28,7 @@
                 <li><a href="{% url 'users' %}"><span class="las la-book-reader"></span><span>Users</span></a></li>
                 <li><a href="{% url 'books' %}"><span class="las la-atlas"></span><span>Books</span></a></li>
                 <li><a href="{% url 'rental' %}"><span class="las la-receipt"></span><span>Rent</span></a></li>
-                <li><a href=""><span class="las la-binoculars"></span><span>Scan</span></a></li>
+                <li><a href="{% url 'scan' %}"><span class="las la-binoculars"></span><span>Scan</span></a></li>
             </ul>
         </div>
     </div>
@@ -74,13 +74,26 @@
                         {% csrf_token %}
                         <form class="input-group" id="login" action="{% url 'save' %}" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
+                            {% if 'update' %}
+                            <input id="Name" type="text" name="userName" class="input-field" placeholder="Name" value="{{val.username}}" required>
+                            <input id="userId" type="hidden" name="userId" class="input-field" placeholder="Name" value="{{val.id}}" required>
+                            <input type="tel" id="phone" name="mobile" class="input-field" pattern="[6-9]{1}[0-9]{9}" placeholder="Ph no" value="{{val.mobile}}">
+<!--                            <input id="img-field" type="file" class="input-field" accept="image/">-->
+                            <input id="img-field" name="image" type="file" class="input-field" accept="image/*">
+                            <input type="hidden" id="hiddenField" name="key" value="updateUser">
+                            {% else %}
                             <input id="Name" type="text" name="userName" class="input-field" placeholder="Name" required>
                             <input type="tel" id="phone" name="mobile" class="input-field" pattern="[6-9]{1}[0-9]{9}" placeholder="Ph no">
 <!--                            <input id="img-field" type="file" class="input-field" accept="image/">-->
                             <input id="img-field" name="image" type="file" class="input-field" accept="image/*">
                             <input type="hidden" id="hiddenField" name="key" value="User">
+                            {% endif %}
                             <button type="submit" class="submit-btn">{{btn}}</button>
+                            {% if 'msg' %}
+                                <h4>{{msg}}</h4>
+                                {% endif %}
                             <br>
+
                         </form>
                         <br>
                     </div>
