@@ -11,4 +11,7 @@ class AppConfig:
         if self.cfg['mongoConn']['userName'] and self.cfg['mongoConn']['password']:
             return f"mongodb://{self.cfg['mongoConn']['userName']}:{self.cfg['mongoConn']['password']}@{self.cfg['mongoConn']['host']}:{self.cfg['mongoConn']['port']}"
 
+    def adminConfident(self):
+        return {"user": self.cfg['admin']['username'], "pass": self.cfg['admin']['password'], "mobile": self.cfg["admin"]["mobile"]}
+
 

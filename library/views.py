@@ -13,7 +13,20 @@ from library.models import ImageModel
 import requests
 Configs = AppConfig()
 client = MongoClient(Configs.getMongoUrl())
-db = client.library
+db = client['library5']
+
+collections = ["unique_id", "users"]
+# dblist = client.list_database_names()
+for coll in collections:
+    if coll in db.list_collection_names():
+        pass
+    else:
+        if coll == "users":
+            admin = Configs.adminConfident()
+            db.unique_id.insert({"key": "user", "id": 1})
+            db.unique_id.insert({"key": "book", "id": 0})
+            db.users.insert({"username": admin['user'], "password": str(admin['pass']), "isdeleted": False,
+                             "isadmin": True, "id": "user_1", "date": time.time(), "role": "admin", "mobile": str(admin["mobile"])})
 
 
 @register.filter
@@ -207,7 +220,7 @@ def saveUpdateForm(request):
         req = request.POST
 
         if req['key'] == 'addUser':
-            options = {"admin": admin, "name": "Add User", "btn": "Add User"}
+            options = {"admin": admin, "name": "Add User", "btn": "Add User", "update": False}
             return render(request, "admin.user.update.html", options)
 
         elif req['key'] == 'updateUser':
@@ -288,7 +301,7 @@ def save(request):
                     options = {"admin": admin, "name": "Update User", "btn": "Update", "msg": "Failed to Update User",
                                "new": True}
                     return render(request, "admin.user.update.html", options)
-            elif req["key"] == "addBook":
+            elif req["key"] == "newBook":
                 try:
                     bookName = req['bookName']
                     author = req['author']

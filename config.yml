@@ -3,3 +3,8 @@ mongoConn:
   port: 27017
   userName: Felix
   password: Fe12i24
+
+admin:
+  username: felix
+  password: 1614
+  mobile: 9876564576
