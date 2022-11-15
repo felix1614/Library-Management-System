@@ -57,7 +57,7 @@
                 <h2>{{arrival}}</h2>
                 <button id="AddUser" onclick="postForm('addUser')" class="add-button">Add User</button>
             </div>
-            <div class="row" onclick="">
+            <div class="row">
                 {% for user in users %}
                 <a href="#" onclick="postForm(['updateUser','{{user.id}}'])">
                     <div class="col-4">

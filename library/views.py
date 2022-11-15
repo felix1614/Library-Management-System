@@ -10,7 +10,7 @@ from datetime import datetime
 from django.template.defaulttags import register
 from django.conf import settings
 from library.models import ImageModel
-
+import requests
 Configs = AppConfig()
 client = MongoClient(Configs.getMongoUrl())
 db = client.library
@@ -187,7 +187,7 @@ def rentForm(request):
     admin = {'name': admin[0]['username'], 'role': admin[0]['role']} if len(admin) >= 1 else {'name': 'unknown',
                                                                                               'role': 'unknown'}
     options = {"admin": admin, "cat": "Rent Book"}
-    return render(request, "admin.rentForm.html")
+    return render(request, "admin.rentForm.html", options)
 
 
 def saveUpdateForm(request):
@@ -341,8 +341,53 @@ def save(request):
 
 
 def scan(request):
+    admin = [admin for admin in
+             db.users.find({"isdeleted": {'$nin': ["true", True]}, "isadmin": {'$nin': ["false", False]}})]
+    admin = {'name': admin[0]['username'], 'role': admin[0]['role']} if len(admin) >= 1 else {'name': 'unknown',
+                                                                                              'role': 'unknown'}
     if request.method == "GET":
-        return render(request, "admin.scan.html", {"topic": "Scan Books"})
+        return render(request, "admin.scan.html", {"topic": "Scan Books", "admin": admin})
     else:
-        return render(request, "admin.scan.html", {"topic": "Tough Books"})
+        try:
+            req = request.POST
+            req = eval(req['val'])
+            books = []
 
+            def requestBook(page):
+                url = f"https://frappe.io/api/method/frappe-library?page={page}&title=and"
+                response = requests.get(url)
+                return response
+            page = 1
+            cond = True
+            while cond:
+                if len(books) <= int(req['qty']):
+                    response = requestBook(page)
+
+                if response.status_code == 200:
+                    responseData = response.json()
+                    for book in responseData['message']:
+                        if len(books) < int(req['qty']):
+                            book['bookId'] = book.pop('bookID')
+                            book['name'] = book.pop('title')
+                            book['author'] = book.pop('authors')
+                            book['newArrival'] = True
+                            book['isdeleted'] = False
+                            book['cost'] = 20
+                            book['rate'] = int(float(book.pop('average_rating')))
+                            book['rate'] = int(book['rate'])
+                            book['date'] = time.time()
+                            book['stock'] = 1
+                            books += book,
+                        else:
+                            cond = False
+                            break
+                    page += 1
+
+            db.books.insert_many(books)
+            options = {"books": books, "admin": admin, "topic": "Scan Books", "scan": True, "msg": "Following books added successfully"}
+            return render(request, "admin.scan.html", options)
+
+        except Exception as e:
+            options = {"admin": admin, "topic": "Scan Books", "scan": True,
+                       "msg": "Failed to Scan Books"}
+            return render(request, "admin.scan.html", options)

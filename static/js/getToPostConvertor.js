@@ -114,10 +114,23 @@ function postForm(req) {
     } else if (req == 'scan') {
         formData.setAttribute("action", "/%5Escan/$%5Escan/$");
         var formElement = document.createElement("input");
+        var qty = document.getElementById('quantity').value;
+        if (qty == ""){
+        qty = 20
+        }
+        else{
+        qty = qty
+        }
         formElement.setAttribute("type", "hidden");
         formElement.setAttribute("name", "key");
         formElement.setAttribute("value", "scan");
+
+        var formObject = document.createElement("input");
+        formObject.setAttribute("type", "hidden");
+        formObject.setAttribute("name", "val");
+        formObject.setAttribute("value", `{'qty':'${qty}'}`);
         formData.appendChild(formElement);
+        formData.appendChild(formObject);
         formData.submit();
 }
 }

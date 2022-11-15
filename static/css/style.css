@@ -336,6 +336,30 @@ tr td:last-child {
     margin-top: 100px;
 }
 
+.input-field-scan {
+    width: 15%;
+    padding: 10px 0;
+    margin: 5px 0;
+    margin-left: 480px;
+    margin-top: 20px;
+    /* border: 1px solid #999; */
+    border: 1px linear-gradient(to left, #ffad06, #ff105f);
+    border-radius: 50px;
+    text-align: center;
+    /* border-left: 30px;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #999; */
+    outline: none;
+    background: transparent;
+}
+
+.scan-msg{
+    margin-top: 40px;
+    text-align: center;
+    margin-left: 440px;
+}
+
 @media only screen and (max-width: 1200px) {
     .sidebar {
         width: 70px;
