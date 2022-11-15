@@ -21,6 +21,9 @@ iii) USER PAGE
 
 iv) RENT A BOOK
 ![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/book%20rent.png "Optional Title")
+
+Upon entering the userId and book id will open a page with rent details
+
 ![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/rent%20book.png "Optional Title")
 
 1. admin can give the book on rent to a user by clicking on rent option on the sidebar/ or by clicking the book listing on the books/ new arrival page.
