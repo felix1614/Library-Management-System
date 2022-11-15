@@ -1,4 +1,13 @@
 # Projects
+
+TECHNOLOGIES USED:
+1) Python
+2) Django
+3) MongoDB
+4) JavaScript
+5) HTML
+6) CSS
+
 i) LOGIN
 1. Admin can login with a given username and password
 ![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/login.png "Optional Title")
