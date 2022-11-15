@@ -14,4 +14,7 @@ class AppConfig:
     def adminConfident(self):
         return {"user": self.cfg['admin']['username'], "pass": self.cfg['admin']['password'], "mobile": self.cfg["admin"]["mobile"]}
 
+    def getDatabase(self):
+        return self.cfg["mongoConn"]["database"]
+
 

@@ -13,7 +13,8 @@ from library.models import ImageModel
 import requests
 Configs = AppConfig()
 client = MongoClient(Configs.getMongoUrl())
-db = client['library5']
+dataBase = Configs.getDatabase()
+db = client[dataBase]
 
 collections = ["unique_id", "users"]
 # dblist = client.list_database_names()

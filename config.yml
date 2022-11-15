@@ -3,6 +3,7 @@ mongoConn:
   port: 27017
   userName: Felix
   password: Fe12i24
+  database: library
 
 admin:
   username: felix
