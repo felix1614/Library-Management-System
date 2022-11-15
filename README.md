@@ -32,12 +32,15 @@ v) Books
 
 ![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/new%20customers.png "Optional Title")
 
-vi) Responsive page
+vi) Book Return
+![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/book%20return.png "Optional Title")
 
+vii) Scan Page
+
+1) By clicking on scan button will scan the books from frappe Api and store it in db by default it will store 20 books, user can give the quantity to how much they want to store. 
 ![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/dynamic%20page.png "Optional Title")
 
-**need some extra time to finish the remaining**
-1) scan
-2) save
-3) image upload
+![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/scan%20result.png "Optional Title")
 
+viii) Responsive page
+![Alt text](https://github.com/felix1614/Projects/blob/Library-Management-System/screenshots/dynamic%20page.png "Optional Title")
