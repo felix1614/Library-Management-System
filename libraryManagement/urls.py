@@ -24,6 +24,7 @@ urlpatterns = [
     path('rentform', include('library.urls')),
     path(r'^books/$', include('library.urls')),
     path(r'^rental/$', include('library.urls')),
+    path(r'^returnbook/$', include('library.urls')),
     path(r'^update/$', include('library.urls')),
     path(r'^users/$', include('library.urls')),
     path(r'^scan/$', include('library.urls')),

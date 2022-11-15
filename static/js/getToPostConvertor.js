@@ -132,5 +132,24 @@ function postForm(req) {
         formData.appendChild(formElement);
         formData.appendChild(formObject);
         formData.submit();
-}
+} else if (req == 'ReturnBook') {
+        formData.setAttribute("action", "/%5Escan/$%5Esave/$");
+        var formElement = document.createElement("input");
+        var formObject = document.createElement("input");
+        var bookId = document.getElementById('Book-id').value;
+//        var Duration = document.getElementById('dur').value;
+        var userName = document.getElementById('userName').value;
+//        var durTime = document.getElementById('duration').value;
+        formElement.setAttribute("type", "hidden");
+        formElement.setAttribute("name", "key");
+        formElement.setAttribute("value", "returnBook");
+
+        formObject.setAttribute("type", "hidden");
+        formObject.setAttribute("name", "val");
+        formObject.setAttribute("value", `{'bookId':'${bookId}','userName':'${userName}'}`);
+
+        formData.appendChild(formElement);
+        formData.appendChild(formObject);
+        formData.submit();
+    }
 }

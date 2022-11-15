@@ -186,8 +186,17 @@ def rentForm(request):
              db.users.find({"isdeleted": {'$nin': ["true", True]}, "isadmin": {'$nin': ["false", False]}})]
     admin = {'name': admin[0]['username'], 'role': admin[0]['role']} if len(admin) >= 1 else {'name': 'unknown',
                                                                                               'role': 'unknown'}
-    options = {"admin": admin, "cat": "Rent Book"}
+    options = {"admin": admin, "cat": "Rent Book", "btn": "Add To Shelf"}
     return render(request, "admin.rentForm.html", options)
+
+
+def returnForm(request):
+    admin = [admin for admin in
+             db.users.find({"isdeleted": {'$nin': ["true", True]}, "isadmin": {'$nin': ["false", False]}})]
+    admin = {'name': admin[0]['username'], 'role': admin[0]['role']} if len(admin) >= 1 else {'name': 'unknown',
+                                                                                              'role': 'unknown'}
+    options = {"admin": admin, "cat": "Return Book", "btn": "Return Book"}
+    return render(request, "admin.returnBook.html", options)
 
 
 def saveUpdateForm(request):
@@ -265,7 +274,6 @@ def save(request):
                     options = {"admin": admin, "name": "Add User", "btn": "Create", "msg": "Failed to create User",
                                "new": True}
                     return render(request, "admin.user.update.html", options)
-
             elif req["key"] == "updateUser":
                 try:
                     userName = req['userName']
@@ -303,15 +311,48 @@ def save(request):
                     options = {"admin": admin, "name": "Add User", "btn": "Create", "msg": "Failed to add book",
                                "new": True}
                     return render(request, "admin.book.create.html", options)
-            else:
+            elif req["key"] == "returnBook":
                 try:
+                    req = req['val']
+                    req = eval(req)
+                    for rentedBook in db.bookRent.find({"userName": req['userName'], "bookId": req['bookId']}):
+                        cost = rentedBook["cost"]
+                        date_ = datetime.fromtimestamp(int(rentedBook["date"]))
+                        # period = rentedBook["period"]
+                        delay = (datetime.now() - date_).days
+                        Total = cost * delay if delay >= 1 else cost * 1
+
+                        book = list(map(lambda x: x,
+                                        db.books.find({"bookId": rentedBook["bookId"], "isdeleted": {'$in': ["false", False]}})))
+                        book = dict(ChainMap(*book)) if len(book) >= 1 else False
+                        if book:
+                            stock = book["stock"]
+                            db.books.update({"bookId": req["bookId"]}, {'$set': {"stock": stock+1}})
+                            db.bookRent.update({"userName": req["userName"], "bookId": req["bookId"]},
+                                               {'$set': {"returned": True}})
+
+                            options = {"admin": admin, "msg": {"msg": "Book added to library", "Total": Total},
+                                       "return": True, "cat": "Return Book", "btn": "Return Book"}
+                            return render(request, "admin.returnBook.html", options)
+                        else:
+                            options = {"admin": admin, "msg": {"msg": "Failed to return book", "Total": ""},
+                                       "return": True, "cat": "Return Book", "btn": "Return Book"}
+                            return render(request, "admin.returnBook.html", options)
+
+                except Exception as e:
+                    options = {"admin": admin, "msg": {"msg": "Failed to return book", "Total": ""},
+                               "return": True, "cat": "Return Book", "btn": "Return Book"}
+                    return render(request, "admin.returnBook.html", options)
+
+            else:
+                try:        # book Rent
                     req = req['val']
                     obj = eval(req)
                     book = list(map(lambda x: x, db.books.find({"bookId": obj["bookId"], "isdeleted": {'$in': ["false", False]}})))
                     book = dict(ChainMap(*book)) if len(book) >= 1 else False
                     for user in db.users.find({"id": obj["userName"], "isdeleted": {'$in': ["false", False]}}):
                         rentaData = {"userName": obj['userName'], "bookId": obj["bookId"], "period": obj["rentDur"],
-                                     "duration": obj["duration"], "returned": False, "date": time.time()}
+                                     "duration": int(obj["duration"]) if len(obj['duration']) >= 1 else 1, "returned": False, "date": time.time(), "cost": book["cost"]}
                         db.bookRent.insert(rentaData)
                         # for book in db.books.find({"bookId": obj["bookId"], "isdeleted": {'$in': ["false", False]}}):
                         book["stock"] -= 1

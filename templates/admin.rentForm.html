@@ -28,6 +28,7 @@
                 <li><a href="{% url 'users' %}"><span class="las la-book-reader"></span><span>Users</span></a></li>
                 <li><a href="{% url 'books' %}"><span class="las la-atlas"></span><span>Books</span></a></li>
                 <li><a href="{% url 'rental' %}" class="active"><span class="las la-receipt"></span><span>Rent</span></a></li>
+                <li><a href="{% url 'returnbook' %}"><span class="las la-receipt"></span><span>Return Book</span></a></li>
                 <li><a href="{% url 'scan' %}"><span class="las la-binoculars"></span><span>Scan</span></a></li>
             </ul>
         </div>
@@ -77,7 +78,7 @@
                             <input id="Book-id" type="text" class="input-field" placeholder="Book Id" required>
                             <br><br>
 <!--                            <h4>$20.00/per day</h4>-->
-                            <a href="#" class="btn" onclick="postForm('RentForm')">Add to Shelf</a>
+                            <a href="#" class="btn" onclick="postForm('RentForm')">{{btn}}</a>
                         </div>
                     </div>
                 </div>
