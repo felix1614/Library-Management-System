@@ -120,10 +120,12 @@ p {
 }
 
 .col-4 {
+    height: 80px;
+    width: 60px;
     flex-basis: 25%;
     padding: 10px;
     min-width: 200px;
-    margin-bottom: 50px;
+    margin-bottom: 500px;
     transition: transform 0.5s;
 }
 
