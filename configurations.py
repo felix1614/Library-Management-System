@@ -12,7 +12,7 @@ class AppConfig:
             return f"mongodb://{self.cfg['mongoConn']['userName']}:{self.cfg['mongoConn']['password']}@{self.cfg['mongoConn']['host']}:{self.cfg['mongoConn']['port']}"
 
     def adminConfident(self):
-        return {"user": self.cfg['admin']['username'], "pass": self.cfg['admin']['password'], "mobile": self.cfg["admin"]["mobile"]}
+        return {"user": self.cfg['admin']['username'], "pass": self.cfg['admin']['password'], "mobile": self.cfg["admin"]["mobile"], "pic": self.cfg["admin"]["proPic"]}
 
     def getDatabase(self):
         return self.cfg["mongoConn"]["database"]

@@ -153,3 +153,16 @@ function postForm(req) {
         formData.submit();
     }
 }
+
+function imgConvertor ()  {
+    var file = document.querySelector('input[type=file]')['files'][0];
+    var reader = new FileReader();
+    var baseString;
+    reader.onloadend = function () {
+        baseString = reader.result;
+        console.log(baseString);
+        document.getElementById("hiddenImage").value = baseString;
+    };
+    reader.readAsDataURL(file);
+
+}

@@ -17,10 +17,10 @@
 <body>
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
-        <div class="sidebar-brand">
+        <a href="{% url 'home' %}"><div class="sidebar-brand">
             <h2><span class="las la-stream"></span><span> Library</span>
             </h2>
-        </div>
+        </div></a>
         <div class="sidebar-menu">
             <ul>
                 <li><a href="{% url 'home' %}"><span class="las la-igloo"></span><span>Dashboard</span></a></li>
@@ -44,7 +44,7 @@
                 <input type="Search" placeholder="Search here">
             </div>
             <div class="user-wrapper">
-                <img src="{{images}}/user-2.png" width="40px" height="40px" alt="">
+                <img src={{admin.image}} width="40px" height="40px" alt="">
                 <div>
                     <h4>{{admin.name}}</h4>
                     <small>{{admin.role}}</small>
@@ -60,7 +60,7 @@
                 <div class="small-container single-product">
                     <div class="row">
                         <div class="col-2">
-                            <img src="{{images}}/books/book1.jpeg" width="100%">
+                            <img src={{bookDet.image}} width="100%">
                         </div>
                         <div class="col-2">
                             <h1 id="bookName">{{bookDet.name}}</h1>
@@ -82,9 +82,9 @@
                                 <input id="duration" type="number" value="1">
                             </div>
                             {% if 'form' %}
-                            <input id="userName" type="text" class="input-field" placeholder="User Name/Id" value="{{det.userName}}" required>
+                            <input id="userName" type="text" class="input-field" placeholder="User Id" value="{{det.userName}}" required>
                             {% else %}
-                            <input id="userName" type="text" class="input-field" placeholder="User Name/Id" required>
+                            <input id="userName" type="text" class="input-field" placeholder="User Id" required>
                             {% endif %}
                             <br>
                             <a href="#" class="btn" onclick="postForm('RentBook')">Add to Shelf</a>

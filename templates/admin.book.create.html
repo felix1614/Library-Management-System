@@ -18,10 +18,10 @@
 <body>
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
-        <div class="sidebar-brand">
+        <a href="{% url 'home' %}"><div class="sidebar-brand">
             <h2><span class="las la-stream"></span><span> Library</span>
             </h2>
-        </div>
+        </div></a>
         <div class="sidebar-menu">
             <ul>
                 <li><a href="{% url 'home' %}"><span class="las la-igloo"></span><span>Dashboard</span></a></li>
@@ -45,7 +45,7 @@
                 <input type="Search" placeholder="Search here">
             </div>
             <div class="user-wrapper">
-                <img src="{{images}}/user-2.png" width="40px" height="40px" alt="">
+                <img src={{admin.image}} width="40px" height="40px" alt="">
                 <div>
                     <h4>{{admin.name}}</h4>
                     <small>{{admin.role}}</small>
@@ -75,11 +75,12 @@
                             <input id="Name" type="text" name="bookName" class="input-field" placeholder="Name" required>
                             <input id="auth" type="text" name="author" class="input-field" placeholder="Author" required>
                             <input id="cost" type="text" name="cost" class="input-field" placeholder="Cost" required>
-                            <input id="rating" type="text" name="rate" class="input-field" placeholder="rate" required>
+                            <input id="rating" type="text" name="rate" class="input-field" placeholder="rate from 1 to 5" pattern="[1-5]{1}" required>
                             <input id="stock" type="text" name="stock" class="input-field" placeholder="stock" required>
 <!--                            <input id="img-field" type="file" class="input-field" accept="image/">-->
                             <label for="img-field" class="input-field-book-img"><i class="fa fa-picture-o" aria-hidden="true"></i> &nbsp Upload profile pic
-                                <input id="img-field" name="image" type="file" accept="image/*"></label>
+                                <input id="img-field" name="image" type="file" onchange="imgConvertor()" accept="image/*"></label>
+                            <input type="hidden" id="hiddenImage" name="img" value="">
                             <input type="hidden" id="hiddenField" name="key" value="newBook">
                             <button type="submit" class="submit-btn" style="margin-top: 50px">{{btn}}</button>
                             <br>

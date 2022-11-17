@@ -13,10 +13,10 @@
 <body>
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
-        <div class="sidebar-brand">
+        <a href="{% url 'home' %}"><div class="sidebar-brand">
             <h2><span class="las la-stream"></span><span> Library</span>
             </h2>
-        </div>
+        </div></a>
         <div class="sidebar-menu">
             <ul>
                 <li><a href="{% url 'home' %}" class="active"><span class="las la-igloo"></span><span>Dashboard</span></a></li>
@@ -40,7 +40,7 @@
                 <input type="Search" placeholder="Search here">
             </div>
             <div class="user-wrapper">
-                <img src="{{images}}/user-2.png" width="40px" height="40px" alt="">
+                <img src={{admin.image}} width="40px" height="40px" alt="">
                 <div>
                     <h4>{{admin.name}}</h4>
                     <small>{{admin.role}}</small>
@@ -109,7 +109,7 @@
                         {% for user in users %}
                             <div class="customer ">
                                 <div class="info ">
-                                    <img src="{{images}}/user-2.png " width="40px " height="40px ">
+                                    <img src={{user.proPic}} width="40px " height="40px ">
                                     <div>
                                         <h4>{{user.username}}</h4>
                                         <small>{{user.id}}</small>
