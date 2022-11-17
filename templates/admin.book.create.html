@@ -78,9 +78,10 @@
                             <input id="rating" type="text" name="rate" class="input-field" placeholder="rate" required>
                             <input id="stock" type="text" name="stock" class="input-field" placeholder="stock" required>
 <!--                            <input id="img-field" type="file" class="input-field" accept="image/">-->
-                            <input id="img-field" name="image" type="file" class="input-field" accept="image/*">
+                            <label for="img-field" class="input-field-book-img"><i class="fa fa-picture-o" aria-hidden="true"></i> &nbsp Upload profile pic
+                                <input id="img-field" name="image" type="file" accept="image/*"></label>
                             <input type="hidden" id="hiddenField" name="key" value="newBook">
-                            <button type="submit" class="submit-btn">{{btn}}</button>
+                            <button type="submit" class="submit-btn" style="margin-top: 50px">{{btn}}</button>
                             <br>
                         </form>
                         <br>

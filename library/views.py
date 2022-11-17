@@ -217,7 +217,7 @@ def saveUpdateForm(request):
     if request.method == 'POST':
         admin = [admin for admin in
                  db.users.find({"isdeleted": {'$nin': ["true", True]}, "isadmin": {'$nin': ["false", False]}})]
-        admin = {'name': admin[0]['username'], 'role': admin[0]['role']} if len(admin) >= 1 else {'name': 'unknown',                                                                                                  'role': 'unknown'}
+        admin = {'name': admin[0]['username'], 'role': admin[0]['role']} if len(admin) >= 1 else {'name': 'unknown', 'role': 'unknown'}
         req = request.POST
 
         if req['key'] == 'addUser':
@@ -279,7 +279,7 @@ def save(request):
                     userDate = time.time()
                     role = "customer"
                     userData = {"username": userName, "isdeleted": False, "isadmin": False, "id": user_id,
-                                "date":userDate, "role": role, "mobile": mobile}
+                                "date": userDate, "role": role, "mobile": mobile}
                     db.users.insert(userData)
                     options = {"admin": admin, "name": "Add User", "btn": "Create", "msg": "user created successfully", "new": True}
                     return render(request, "admin.user.update.html", options)

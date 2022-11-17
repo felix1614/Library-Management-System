@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-{% load static %}
-{% static "images" as images %}
+<!DOCTYPE html> {% load static %} {% static "images" as images %}
 <html lang="en">
 
 <head>
@@ -54,13 +52,13 @@
         </header>
 
         <div class="small-container">
-<!--            <div class="row row-2">-->
-<!--                <h2>{{name}}</h2>-->
-<!--            </div>-->
+            <!--            <div class="row row-2">-->
+            <!--                <h2>{{name}}</h2>-->
+            <!--            </div>-->
             {% if new %}
-                <div class="row row-2">
-                    <h2>{{msg}}</h2>
-                </div>
+            <div class="row row-2">
+                <h2>{{msg}}</h2>
+            </div>
             {% else %}
             <div class="row row-2">
                 <h2>{{name}}</h2>
@@ -80,19 +78,20 @@
                             <input id="userId" type="hidden" name="userId" class="input-field" placeholder="Name" value="{{val.id}}" required>
                             <input type="tel" id="phone" name="mobile" class="input-field" pattern="[6-9]{1}[0-9]{9}" placeholder="Ph no" value="{{val.mobile}}">
 <!--                            <input id="img-field" type="file" class="input-field" accept="image/">-->
-                            <input id="img-field" name="image" type="file" class="input-field" accept="image/*">
+                            <label for="img-field" class="input-field-img"><i class="fa fa-picture-o" aria-hidden="true"></i> &nbsp Upload profile pic
+                                <input id="img-field" name="image" type="file" accept="image/*"></label>
                             <input type="hidden" id="hiddenField" name="key" value="updateUser">
                             {% else %}
                             <input id="Name" type="text" name="userName" class="input-field" placeholder="Name" required>
                             <input type="tel" id="phone" name="mobile" class="input-field" pattern="[6-9]{1}[0-9]{9}" placeholder="Ph no">
-<!--                            <input id="img-field" type="file" class="input-field" accept="image/">-->
-                            <input id="img-field" name="image" type="file" class="input-field" accept="image/*">
-                            <input type="hidden" id="hiddenField" name="key" value="User">
+                            <!--                            <input id="img-field" type="file" class="input-field" accept="image/">-->
+                            <label for="img-field" class="input-field-img"><i class="fa fa-picture-o" aria-hidden="true"></i> &nbsp Upload profile pic
+                            <input id="img-field" name="image" type="file" accept="image/*">
+                            </label>
+                            <input type="hidden" id="hiddenField" name="key" value="User"> {% endif %}
+                            <button type="submit" class="submit-btn" style="margin-top: 50px">{{btn}}</button> {% if 'msg' %}
+                            <h4>{{msg}}</h4>
                             {% endif %}
-                            <button type="submit" class="submit-btn">{{btn}}</button>
-                            {% if 'msg' %}
-                                <h4>{{msg}}</h4>
-                                {% endif %}
                             <br>
 
                         </form>
@@ -102,8 +101,8 @@
             </div>
         </div>
     </div>
-<script type="text/javascript " src="{% static 'js/getToPostConvertor.js' %} "></script>
-<!--    <script src="{% static 'js/index.toggle.js' %}"></script>-->
+    <script type="text/javascript " src="{% static 'js/getToPostConvertor.js' %} "></script>
+    <!--    <script src="{% static 'js/index.toggle.js' %}"></script>-->
 </body>
 
 </html>
