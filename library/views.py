@@ -1,16 +1,12 @@
 import base64
-import json
 import os.path
 import time
 from collections import ChainMap
 from django.shortcuts import render
-from django.http import JsonResponse
 from pymongo import MongoClient, UpdateOne
 from configurations import AppConfig
 from datetime import datetime
 from django.template.defaulttags import register
-from django.conf import settings
-from library.models import ImageModel
 import requests
 
 from libraryManagement.settings import BASE_DIR
