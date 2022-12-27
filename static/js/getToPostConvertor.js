@@ -5,15 +5,52 @@
 //    form.append('<input type="hidden" name="id" value="4"/>')
 //    form.submit();
 //});
+// const searchInput = document.getElementById("search");
+// let containerData = document.querySelector("#rowVal").children;
+// containerData = Array.from(containerData);
+
+// booksData = containerData.map(book => {
+//         const tags = book.getElementsByTagName("*");
+//         return { name: tags.bookName.value, element: book }
+
+//     })
+
+// searchInput.addEventListener("input", e => {
+//     const value = e.target.value.toLowerCase()
+//     booksData.forEach(bookN => {
+//         const isVisible = bookN.name.toLowerCase().includes(value)
+//         bookN.element.classList.toggle("hide", !isVisible)
+//     })
+// })
+
+const search = () => {
+    const searchBox = document.getElementById("search-item").value.toUpperCase();
+    const storeItems = document.getElementById("rowVal");
+    const product = document.querySelectorAll(".col-4");
+    const pname = document.getElementsByTagName("h4");
+    for (var i = 0; i < pname.length; i++) {
+        let match = product[i].getElementsByTagName("h4")[0];
+        if (match) {
+            let texvalue = match.textContent || match.innerHTML
+            if (texvalue.toUpperCase().indexOf(searchBox) > -1) {
+                product[i].style.display = "";
+            } else {
+                product[i].style.display = "none";
+            }
+        }
+    }
+
+}
+
+
 
 function postForm(req) {
     // window.location.href = "/";
-    if (typeof(req) != 'string'){
-    reqKey = req[1];
-    req = req[0];
-    }
-    else {
-    req = req;
+    if (typeof(req) != 'string') {
+        reqKey = req[1];
+        req = req[0];
+    } else {
+        req = req;
     }
     var formData = document.getElementById('postChanger');
     if (req == 'bookArrival') {
@@ -48,7 +85,7 @@ function postForm(req) {
         formElement.setAttribute("name", "key");
         formElement.setAttribute("value", "updateUser");
 
-//        var uname = document.getElementById('uname').innerText;
+        //        var uname = document.getElementById('uname').innerText;
         var formElement1 = document.createElement("input");
         formElement1.setAttribute("type", "hidden");
         formElement1.setAttribute("name", "val");
@@ -78,7 +115,7 @@ function postForm(req) {
         var formObject = document.createElement("input");
         var bookId = document.getElementById('bookID').value;
         var Duration = document.getElementById('dur').value;
-//        var dur = Duration.options[Duration.selectedIndex].text;
+        //        var dur = Duration.options[Duration.selectedIndex].text;
         var userName = document.getElementById('userName').value;
         var durTime = document.getElementById('duration').value;
         formElement.setAttribute("type", "hidden");
@@ -92,14 +129,14 @@ function postForm(req) {
         formData.appendChild(formElement);
         formData.appendChild(formObject);
         formData.submit();
-    }else if (req == 'RentForm') {
+    } else if (req == 'RentForm') {
         formData.setAttribute("action", "/%5Escan/$%5Erentform/$");
         var formElement = document.createElement("input");
         var formObject = document.createElement("input");
         var bookId = document.getElementById('Book-id').value;
-//        var Duration = document.getElementById('dur').value;
+        //        var Duration = document.getElementById('dur').value;
         var userName = document.getElementById('userName').value;
-//        var durTime = document.getElementById('duration').value;
+        //        var durTime = document.getElementById('duration').value;
         formElement.setAttribute("type", "hidden");
         formElement.setAttribute("name", "key");
         formElement.setAttribute("value", "rentalForm");
@@ -115,11 +152,10 @@ function postForm(req) {
         formData.setAttribute("action", "/%5Escan/$%5Escan/$");
         var formElement = document.createElement("input");
         var qty = document.getElementById('quantity').value;
-        if (qty == ""){
-        qty = 20
-        }
-        else{
-        qty = qty
+        if (qty == "") {
+            qty = 20
+        } else {
+            qty = qty
         }
         formElement.setAttribute("type", "hidden");
         formElement.setAttribute("name", "key");
@@ -132,14 +168,14 @@ function postForm(req) {
         formData.appendChild(formElement);
         formData.appendChild(formObject);
         formData.submit();
-} else if (req == 'ReturnBook') {
+    } else if (req == 'ReturnBook') {
         formData.setAttribute("action", "/%5Escan/$%5Esave/$");
         var formElement = document.createElement("input");
         var formObject = document.createElement("input");
         var bookId = document.getElementById('Book-id').value;
-//        var Duration = document.getElementById('dur').value;
+        //        var Duration = document.getElementById('dur').value;
         var userName = document.getElementById('userName').value;
-//        var durTime = document.getElementById('duration').value;
+        //        var durTime = document.getElementById('duration').value;
         formElement.setAttribute("type", "hidden");
         formElement.setAttribute("name", "key");
         formElement.setAttribute("value", "returnBook");
@@ -154,11 +190,11 @@ function postForm(req) {
     }
 }
 
-function imgConvertor ()  {
+function imgConvertor() {
     var file = document.querySelector('input[type=file]')['files'][0];
     var reader = new FileReader();
     var baseString;
-    reader.onloadend = function () {
+    reader.onloadend = function() {
         baseString = reader.result;
         console.log(baseString);
         document.getElementById("hiddenImage").value = baseString;

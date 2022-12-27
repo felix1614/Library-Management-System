@@ -42,7 +42,7 @@
             </h2>
             <div class="search-wrapper">
                 <span class="las la-search"></span>
-                <input type="Search" placeholder="Search here">
+                <input type="Search" placeholder="Search here" id="search-item" onkeyup="search()">
             </div>
             <div class="user-wrapper">
                 <img src="{{admin.image}}" width="40px" height="40px" alt="">
@@ -65,7 +65,7 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="row">
+            <div class="row" id="rowVal">
                 {% for book in books %}
                 <div class="col-4">
                     <a href="#" onclick="postForm(['rentPage ','{{book.bookId}}'])"><img src={{book.image}}></a>
