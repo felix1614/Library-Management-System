@@ -1,8 +1,8 @@
 mongoConn:
   host: localhost
   port: 27017
-  userName: Felix
-  password: Fe12i24
+  userName: admin
+  password: Nanfa1614
   database: library
 
 admin:
