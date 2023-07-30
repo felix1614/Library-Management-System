@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+{% static "images" as images %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>login & Register</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+
+<body>
+    <div class="loginBack">
+        <div class="form-box">
+            <br>
+            <br>
+            <button type="button" class="submit-btn-1">Log In</button>
+            {% csrf_token %}
+<!--            <form class="input-group" id="login" onsubmit="loginValidation()">-->
+            <form class="input-group" id="login" action="{% url 'home' %}" method="POST">
+                {% csrf_token %}
+                <input id="userName" type="text" class="input-field" placeholder="User Name" name="username" required>
+                <input id="passWord" type="password" class="input-field" placeholder="Password" name="pass" required>
+                <br>
+                <br>
+                <button type="submit" class="submit-btn">Log in</button>
+            </form>
+            <!-- <form class="input-group" id="register">
+                <input type="text" class="input-field" placeholder="User Name" required>
+                <input type="email" class="input-field" placeholder="Email Id" required>
+                <input type="text" class="input-field" placeholder="Password" required>
+                <br>
+                <br>
+                <button type="submit" class="submit-btn">Register</button>
+            </form> -->
+        </div>
+    </div>
+    <script src="{% static 'js/login.register.js' %}"></script>
+</body>
+
+</html>
